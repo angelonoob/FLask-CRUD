@@ -33,5 +33,16 @@ def index():
         return render_template('index.html', groceries=groceries)
 
 
+@app.route('/delete/<int:id>')
+def delete(id):
+    grocery = Grocery.query.get_or_404(id)
+
+    try:
+        db.session.delete(grocery)
+        db.session.commit()
+        return redirect('/')
+    except:
+        return "There was a problem deleting data"
+
 if __name__ == '__main__':
     app.run(debug=True)

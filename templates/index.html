@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div>
-        <h1>Flask CRUD</h1>
+    <div class="container">
+        <h1 class="my-4">Flask CRUD</h1>
         {% if groceries|length <1 %}
         <p>There is nothing to buy for now.</p>
         {% else %}
-        <table>
+        <table class="table">
             <thead>
                 <tr>
                     <th>Groceries</th>
@@ -19,18 +19,13 @@
                 <tr>
                     <td><a href="">{{ grocery.name }}</a></td>
                     <td>{{ grocery.created_at.date() }}</td>
-                    <td><a href="">Delete</td>
+                    <td class="text-right"><a class="btn btn-danger btn-sm" href="/delete/{{ grocery.id }}" role="button">Delete</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
         {% endif %}
-
-        <form action="/" method="post">
-            <label for="newStuff">New Stuff:</label>
-            <input type="text" name="name" id="newStuff">
-            <button type="submit">Add</button>
-        </form>
-
+        
+        {% include 'snippets/form.html' %}
     </div>
 {% endblock content %}
